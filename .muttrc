@@ -1,0 +1,158 @@
+# List of header fields to view
+ignore *
+unignore date: from x-mailer: user-agent: from: reply-to: to: cc: subject:
+hdr_order date: from x-mailer: user-agent: from: reply-to: to: cc: subject:
+
+# Gmail settings
+set smtp_url = "smtps://nick.barkas@gmail.com@smtp.gmail.com:587/"
+set imap_user = "nick.barkas@gmail.com"
+set spoolfile = "imaps://imap.gmail.com:993/INBOX"
+set folder = "imaps://imap.gmail.com:993"
+set postponed="+[Gmail]/Drafts"
+set from = "nick.barkas@gmail.com"
+
+# KTH settings. Uses a tunnel to send mail through FreeBSD servers instead of 
+# KTH's SMTP server, though.
+#set smtp_url = "smtps://barkas@smtp.kth.se:465"
+#set imap_user = "barkas"
+#set spoolfile = "imaps://webmail.kth.se:993/INBOX"
+#set folder = "imaps://webmail.kth.se:993"
+
+# Who am I?
+set realname = "Nick Barkas"
+
+# Base hook when not in a freebsd folder
+#folder-hook . 'set from = "barkas@kth.se" smtp_url = "smtp://smtp.kth.se/"; unset sendmail'
+
+# Override from address and smtp_url when in the freebsd folder
+#folder-hook =freebsd/* 'set from = "snb@freebsd.org" sendmail = "ssh freefall /usr/sbin/sendmail -oem -oi"; unset smtp_url'
+
+# Requires setting up an SSH tunnel to the mail servers we want to use. e.g.
+# ssh -N -L 2025:127.0.0.1:25 freefall.freebsd.org
+#set smtp_url = "smtp://localhost:2025/"
+
+# IMAP folders to use for sent and drafts
+#set record = "=Sent Items"
+#set postponed = "=Drafts"
+
+# 'd' or sends messages to trash rather than actually deleting. Have to use tab
+# completion because I don't know how else to handle space in Deleted Items
+#macro index d "<save-message>=Deleted<tab><enter>" "move message to trash"
+#macro pager d "<save-message>=Deleted<tab><enter>" "move message to trash"
+
+# If I were using local folders
+#set mbox_type=Maildir
+#set folder="~/mail"
+
+# Caching for extra speed.
+#set header_cache = "~/Library/Caches/mutt/hcache"
+#set message_cachedir = "~/.mutt/mcache"
+
+set noconfirmappend
+set confirmcreate
+set copy=yes
+set delete=yes
+set edit_headers
+set editor="vim -c 'set tw=72 et ft=mail'"
+unset followup_to
+set quit=yes
+set sig_dashes
+set nomove
+set nomark_old
+set strict_threads=no
+set askcc
+set sort=threads
+set sort_aux=reverse-date-received
+set forward_format=%s
+
+# Color settings
+color header red default .
+color header green default Subject:
+color header yellow default ^From:
+color header cyan default ^To:
+color header green default Delivered-To:
+color body white default [_a-z\.\$A-Z0-9-]+@[a-zA-Z0-9\./\-]+
+color body yellow default (http|ftp)://[_a-zA-Z0-9\./~\-]+
+color quoted green default 
+color signature magenta default
+color indicator yellow blue
+color attachment yellow default 
+color tree red default 
+color indicator yellow blue 
+color status yellow blue
+color tilde blue default
+
+# If addressed to me
+color index green black "~C snb@moduli.net"
+color index green black "~C snb@freebsd.org"
+color index green black "~C barkas@kth.se"
+color index green black "~C snb@threerings.net"
+color index green black "~C nick.barkas@gmail.com"
+
+# Mailing lists
+color index yellow black "~C debian"
+
+# 'S' sends a message to the spam folder for later sa-learn'ing
+#macro index S "s=spam\n" "mark message as spam"
+#macro pager S "s=spam\n" "mark message as spam"
+
+# Up and down arrows will still scroll through messages, but rebind j and k to
+# scroll within a message.
+bind pager j next-line
+bind pager k previous-line
+
+# Pine-like keybindings
+#bind index v display-message
+#bind index p previous-undeleted
+#bind index n next-undeleted
+#bind index ' ' next-page
+#bind index c mail
+#bind index g change-folder
+#bind index x sync-mailbox
+#bind index $ sort-mailbox
+#bind index a tag-prefix
+#
+#bind pager p previous-undeleted
+#bind pager n next-undeleted
+#bind pager ' ' next-page
+#bind pager c mail
+#bind pager \n noop	# PINE prints "No default action for this menu."
+#bind pager <up> previous-line
+#bind pager <down> next-line
+#bind pager j next-line
+#bind pager k previous-line
+#
+#bind compose \cx send-message
+
+# Browser
+#mailboxes  ! `echo mail/*`
+#bind browser $ check-new
+set folder_format="%2C %N %8s %d %f"
+set index_format="%Z %3C %{%b %d} %-19.19L (%5c) %s"
+
+# PGP stuff
+set pgp_verify_sig=yes
+set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
+
+# Mailing lists I subscribe to
+subscribe svn-src-all@freebsd.org
+subscribe src-committers@freebsd.org
+subscribe freebsd-arch@freebsd.org
+subscribe freebsd-current@freebsd.org
+subscribe freebsd-fs@freebsd.org
+subscribe arch@freebsd.org
+subscribe current@freebsd.org
+subscribe fs@freebsd.org
+subscribe developers@freebsd.org
+
+# But I don't want to see the list address in the folder index instead of
+# sender. Default has a %-15.15L where I have %-15.15F
+set index_format = "%4C %Z %{%b %d} %-15.15F (%?l?%4l&%4c?) %s"
+
+# Set default saveboxes for certain senders
+# save-hook *@ +!
+#save-hook @ebay.com +ebay
+
+# Email aliases
+#set alias_file = "~/.mail_aliases"
+#source $alias_file
