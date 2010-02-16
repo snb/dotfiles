@@ -35,6 +35,16 @@ if [ -e $HOME/.p4env ]; then
     source $HOME/.p4env
 fi
 
+# Go environmental variables
+if [ -e $HOME/.goenv ]; then
+    source $HOME/.goenv
+fi
+
+# If we have a $HOME/bin directory, add it to the path
+if [ -d $HOME/bin ]; then
+    export PATH=$PATH:$HOME/bin
+fi
+
 # OS specific stuff
 if [ `uname` = 'Darwin' ] ; then
     # Let's use a Swedish locale, but English for language
