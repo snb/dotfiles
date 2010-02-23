@@ -82,9 +82,6 @@ elif [ `uname` = 'FreeBSD' ] ; then
     compctl -K listsysctls sysctl
 fi
 
-# Spotify Kerberos and AFS login
-alias klogin="kinit -V snb@SPOTIFY.NET; aklog spotify.net -k SPOTIFY.NET"
-
 # More aliases
 alias dvips='dvips -Ppdf -G0'
 alias vi='vim'
