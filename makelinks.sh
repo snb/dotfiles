@@ -1,8 +1,7 @@
 #!/bin/sh
 #
 
-# XXX this should create symlinks in $HOME to the appropriate files in this
-# directory.
+# Create symlinks in $HOME to the appropriate files in this directory.
 
 DOTFILES=".gitconfig .muttrc .vim .vimrc .zshrc"
 
