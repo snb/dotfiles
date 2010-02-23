@@ -29,12 +29,6 @@ Hostname pogosim.particle.kth.se
 Host vader
 HostName vader.kicks-ass.net
 
-Host lennyvm
-Hostname localhost
-Port 2222
-ForwardAgent yes
-ForwardX11 yes
-
 # Set up tunnel to irssi proxy on unyew. Just ssh unyewtunnel
 Host unyewtunnel
 Hostname unyew.silverninja.net
