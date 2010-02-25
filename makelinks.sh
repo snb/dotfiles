@@ -9,4 +9,5 @@ for file in $DOTFILES; do
     ln -s .dotfiles/$file .
 done
 
-ln -s .dotfiles/.ssh-config .ssh/config
+cd .ssh
+ln -s ../.dotfiles/.ssh-config config
