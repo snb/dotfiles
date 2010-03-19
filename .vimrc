@@ -10,6 +10,7 @@ set backspace=2
 
 " Usually using a black background.
 set background=dark
+highlight Normal guibg=Black guifg=White
 
 " I hate beeping.
 set noerrorbells
