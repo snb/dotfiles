@@ -76,9 +76,7 @@ filetype indent on
 autocmd FileType fortran setlocal shiftwidth=3
 
 " Don't want to expand tabs for Makefiles.
-autocmd FileType make setlocal noexpandtab
-autocmd FileType make setlocal shiftwidth=8
-autocmd FileType make setlocal tabstop=8
+autocmd FileType make setlocal noexpandtab shiftwidth=8 tabstop=8
 
 " Wrap text at 72 characters for svn and git commits
 autocmd FileType gitcommit setlocal textwidth=72
