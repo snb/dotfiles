@@ -63,6 +63,11 @@ if [ `uname` = 'Darwin' ] ; then
     alias ls='ls -asFhG'
     alias l='ls -alsFhG'
 
+    # Macports
+    if [ -d /opt/local/bin ] ; then
+        PATH=$PATH:/opt/local/bin
+    fi
+
 elif [ `uname` = 'Linux' ] ; then
     # Swedish locale for dates, numbers, etc. but leave others as default.
     # Remember to dpkg-reconfigure locales on Debian if Swedish locale isn't set
@@ -136,7 +141,7 @@ compctl -g "*.zip *.jar *.war" + -g "*(-/) .*(-/)" unzip
 
 compctl -g "*.Z" + -g "*(-/) .*(-/)" uncompress
 
-compctl -g "*.tar *.tgz *.tz *.tar.Z *.tar.bz2 *.tZ *.tar.gz *.tbz2" \
+compctl -g "*.tar *.tgz *.tz *.tar.Z *.tar.bz2 *.tZ *.tar.gz *.tbz2 *.tbz" \
 	+ -g "*(-/) .*(-/)" tar
 
 compctl -g "*.tex" + -g "*(-/) .*(-/)"\
