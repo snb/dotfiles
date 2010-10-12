@@ -4,12 +4,13 @@ unignore date: from x-mailer: user-agent: from: reply-to: to: cc: subject:
 hdr_order date: from x-mailer: user-agent: from: reply-to: to: cc: subject:
 
 # Gmail settings
-set smtp_url = "smtps://nick.barkas@gmail.com@smtp.gmail.com:587/"
+set smtp_url = "smtp://nick.barkas@gmail.com@smtp.gmail.com:587/"
 set imap_user = "nick.barkas@gmail.com"
 set spoolfile = "imaps://imap.gmail.com:993/INBOX"
 set folder = "imaps://imap.gmail.com:993"
 set postponed="+[Gmail]/Drafts"
 set from = "nick.barkas@gmail.com"
+set record = ""
 
 # KTH settings. Uses a tunnel to send mail through FreeBSD servers instead of 
 # KTH's SMTP server, though.
@@ -133,6 +134,9 @@ set index_format="%Z %3C %{%b %d} %-19.19L (%5c) %s"
 # PGP stuff
 set pgp_verify_sig=yes
 set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
+set pgp_good_sign = "^gpg: Good signature from"
+# Need OpenPGP card for this
+#set pgp_sign_as=0xBDA4BED3
 
 # Mailing lists I subscribe to
 subscribe svn-src-all@freebsd.org
