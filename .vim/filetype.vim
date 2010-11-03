@@ -5,3 +5,6 @@ autocmd BufNewFile,BufRead *.h setf c
 
 " .go files are probably Go language source
 autocmd BufNewFile,BufRead *.go setf go
+
+" Thrift specifications
+autocmd BufNewFile,BufRead *.thrift setf thrift
