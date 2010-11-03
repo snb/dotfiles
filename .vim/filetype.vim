@@ -8,3 +8,7 @@ autocmd BufNewFile,BufRead *.go setf go
 
 " Thrift specifications
 autocmd BufNewFile,BufRead *.thrift setf thrift
+
+" Markdown text
+autocmd BufNewFile,BufRead *.md setf mkd
+autocmd BufNewFile,BufRead *.markdown setf mkd
