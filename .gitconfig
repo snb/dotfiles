@@ -15,3 +15,6 @@
     whitespace = trailing-space,space-before-tab
     autocrlf = input
     safecrlf = true
+
+[branch]
+    autosetuprebase = always
