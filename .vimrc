@@ -29,6 +29,10 @@ set shiftwidth=4
 set expandtab
 set smarttab
 
+" Show tabs as >-------
+set listchars=tab:>-
+set list
+
 " Most of the time I also like auto indentation. smartindent is kind of stupid
 " though.
 set autoindent
