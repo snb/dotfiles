@@ -59,7 +59,7 @@ endif
 
 " Put file name and type on status line. To the right, line number/total lines,
 " column number. Always display status line, too.
-set statusline=%f\ %y\ %=%l/%L,%v
+set statusline=%f\ %y\ %{fugitive#statusline()}\ %=%l/%L,%v
 set laststatus=2
 
 " Turn on spell checking, with Oxford English Dictionary spelling
