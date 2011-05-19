@@ -8,28 +8,5 @@ GSSAPIAuthentication yes
 Host unyew
 HostName unyew.silverninja.net
 
-Host maguro
-HostName maguro.moduli.net
-
-Host my
-HostName my.nada.kth.se
-User barkas
-GSSAPIAuthentication yes
-GSSAPIDelegateCredentials yes
-
 Host freefall
 HostName freefall.freebsd.org
-
-Host hub
-HostName hub.freebsd.org
-
-Host pogosim
-Hostname pogosim.particle.kth.se
-
-Host vader
-HostName vader.kicks-ass.net
-
-# Set up tunnel to irssi proxy on unyew. Just ssh unyewtunnel
-Host unyewtunnel
-Hostname unyew.silverninja.net
-LocalForward localhost:62323 localhost:62324
