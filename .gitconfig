@@ -7,10 +7,6 @@
     status = auto
     branch = auto
 
-[github]
-    user = snb
-    token = 46807653f52a2ead0b3f172353b3d5d1
-
 [core]
     whitespace = trailing-space,space-before-tab
     autocrlf = input
