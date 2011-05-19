@@ -2,7 +2,7 @@ Various config files that I usually want in my home directory. Clone it as
 $HOME/.dotfiles:
 
     cd ~
-    git clone https://github.com/snb/dotfiles.git
+    git clone https://github.com/snb/dotfiles.git ./.dotfiles
 
 Then make symlinks (this doesn't handle existing dotfiles with the same names
 yet).
