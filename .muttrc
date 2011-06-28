@@ -12,25 +12,14 @@ set postponed="+[Gmail]/Drafts"
 set from = "nick.barkas@gmail.com"
 set record = ""
 
-# KTH settings. Uses a tunnel to send mail through FreeBSD servers instead of 
-# KTH's SMTP server, though.
-#set smtp_url = "smtps://barkas@smtp.kth.se:465"
-#set imap_user = "barkas"
-#set spoolfile = "imaps://webmail.kth.se:993/INBOX"
-#set folder = "imaps://webmail.kth.se:993"
-
 # Who am I?
 set realname = "Nick Barkas"
 
 # Base hook when not in a freebsd folder
-#folder-hook . 'set from = "barkas@kth.se" smtp_url = "smtp://smtp.kth.se/"; unset sendmail'
+#folder-hook . 'set from = "nick.barkas@gmail.com" smtp_url = "smtp://nick.barkas@gmail.com@smtp.gmail.com:587/"; unset sendmail'
 
 # Override from address and smtp_url when in the freebsd folder
 #folder-hook =freebsd/* 'set from = "snb@freebsd.org" sendmail = "ssh freefall /usr/sbin/sendmail -oem -oi"; unset smtp_url'
-
-# Requires setting up an SSH tunnel to the mail servers we want to use. e.g.
-# ssh -N -L 2025:127.0.0.1:25 freefall.freebsd.org
-#set smtp_url = "smtp://localhost:2025/"
 
 # IMAP folders to use for sent and drafts
 #set record = "=Sent Items"
@@ -84,10 +73,7 @@ color status yellow blue
 color tilde blue default
 
 # If addressed to me
-color index green black "~C snb@moduli.net"
 color index green black "~C snb@freebsd.org"
-color index green black "~C barkas@kth.se"
-color index green black "~C snb@threerings.net"
 color index green black "~C nick.barkas@gmail.com"
 
 # Mailing lists
