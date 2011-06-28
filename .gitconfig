@@ -17,3 +17,6 @@
 
 [push]
     default = tracking
+
+[alias]
+    guilt = "!f(){ git log --pretty='format:%an <%ae>' $@ | sort | uniq -c | sort -rn; }; f"
