@@ -25,6 +25,15 @@ setopt prompt_subst
 PROMPT='%{$fg[cyan]%}%n@%m> %{$reset_color%}'; export PROMPT
 RPROMPT='%{$fg_bold[yellow]%}$(git_prompt_info)%{$fg[magenta]%}%~ %{$fg[red]%}%T%{$reset_color%}'; export RPROMPT
 
+# Swedish locale for dates, numbers, etc. but leave others as default.
+# Remember to dpkg-reconfigure locales on Debian if Swedish locale isn't set
+# up already.
+export LC_COLLATE="sv_SE.UTF-8"
+export LC_MEASUREMENT="sv_SE.UTF-8"
+export LC_MONETARY="sv_SE.UTF-8"
+export LC_NUMERIC="sv_SE.UTF-8"
+export LC_TIME="sv_SE.UTF-8"
+
 # Amazon EC2
 if [ -e $HOME/.ec2env ]; then
     source $HOME/.ec2env
@@ -47,10 +56,6 @@ fi
 
 # OS specific stuff
 if [ `uname` = 'Darwin' ] ; then
-    # Let's use a Swedish locale, but English for language
-    export LC_ALL="sv_SE.UTF-8"
-    export LANGUAGE="en_GB"
-
     # I want to keep my added TeX stuff in ~/Library/texmf, not default ~/texmf
     TEXMFHOME=$HOME/Library/texmf
     export TEXMFHOME
@@ -69,15 +74,6 @@ if [ `uname` = 'Darwin' ] ; then
     fi
 
 elif [ `uname` = 'Linux' ] ; then
-    # Swedish locale for dates, numbers, etc. but leave others as default.
-    # Remember to dpkg-reconfigure locales on Debian if Swedish locale isn't set
-    # up already.
-    export LC_COLLATE="sv_SE.UTF-8"
-    export LC_MEASUREMENT="sv_SE.UTF-8"
-    export LC_MONETARY="sv_SE.UTF-8"
-    export LC_NUMERIC="sv_SE.UTF-8"
-    export LC_TIME="sv_SE.UTF-8"
-
     alias ls='ls -asFh --color'
     alias l='ls -alsFh --color'
 elif [ `uname` = 'FreeBSD' ] ; then
