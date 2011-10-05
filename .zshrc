@@ -69,8 +69,7 @@ autoload -U colors
 colors
 setopt prompt_subst
 PROMPT='%{$fg[cyan]%}%n@%m> %{$reset_color%}'; export PROMPT
-RPROMPT='%{$fg_bold[yellow]%}$(git_prompt_info)%{$fg[magenta]%}%~ %{$fg[red]%}%T%{$reset_color%}'; export RPROMPT
-
+RPROMPT='%(?..%{$fg_bold[red]%}\$?: $? )%{$fg_bold[yellow]%}$(git_prompt_info)%{$fg[magenta]%}%~ %{$fg[red]%}%T%{$reset_color%}'; export RPROMPT
 
 ## Aliases ##
 alias dvips='dvips -Ppdf -G0'
