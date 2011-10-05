@@ -3,7 +3,6 @@ source /etc/profile
 BLOCKSIZE=K; export BLOCKSIZE
 EDITOR=vim; export EDITOR
 PAGER=less; export PAGER
-#LS_COLORS='no=00:fi=00:di=01;35:ln=01;33:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.dmg=01;31:*.sit=01;31:*.jpg=01;36:*.jpeg=01;36:*.png=01;36:*.gif=01;36:*.bmp=01;36:*.ppm=01;36:*.tga=01;36:*.xbm=01;36:*.xpm=01;36:*.tif=01;36:*.tiff=01;36:*.mpg=00;37:*.mov=00;37:*.mp4=00;37:*.mp3=00;37:*.wav=00;37:*.aiff=00;37:*.avi=00;37:'; export LS_COLORS
 LSCOLORS='gxfxcxdxbxegedabagacad'; export LSCOLORS
 PGPPATH=$HOME/.gnupg; export PGPPATH
 HISTFILE="$HOME/.zsh_history"; export HISTFILE
@@ -24,15 +23,6 @@ colors
 setopt prompt_subst
 PROMPT='%{$fg[cyan]%}%n@%m> %{$reset_color%}'; export PROMPT
 RPROMPT='%{$fg_bold[yellow]%}$(git_prompt_info)%{$fg[magenta]%}%~ %{$fg[red]%}%T%{$reset_color%}'; export RPROMPT
-
-# Swedish locale for dates, numbers, etc. but leave others as default.
-# Remember to dpkg-reconfigure locales on Debian if Swedish locale isn't set
-# up already.
-export LC_COLLATE="sv_SE.UTF-8"
-export LC_MEASUREMENT="sv_SE.UTF-8"
-export LC_MONETARY="sv_SE.UTF-8"
-export LC_NUMERIC="sv_SE.UTF-8"
-export LC_TIME="sv_SE.UTF-8"
 
 # Amazon EC2
 if [ -e $HOME/.ec2env ]; then
