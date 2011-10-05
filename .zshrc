@@ -1,4 +1,13 @@
-# Environmental variables:
+## Functions ##
+# Get the name of the branch we are on. Returns if we aren't in a git directory
+# or git isn't installed.
+git_prompt_info() {
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+    echo "(${ref#refs/heads/}) "
+}
+
+
+## Environmental variables ##
 source /etc/profile
 BLOCKSIZE=K; export BLOCKSIZE
 EDITOR=vim; export EDITOR
@@ -7,22 +16,6 @@ LSCOLORS='gxfxcxdxbxegedabagacad'; export LSCOLORS
 PGPPATH=$HOME/.gnupg; export PGPPATH
 HISTFILE="$HOME/.zsh_history"; export HISTFILE
 SAVEHIST=100000; export SAVEHIST
-
-# Get the name of the branch we are on. Returns if we aren't in a git directory
-# or git isn't installed.
-git_prompt_info() {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo "(${ref#refs/heads/}) "
-}
-
-# Set colours using nice names instead of nasty escape sequences
-autoload -U colors
-colors
-
-# Set prompts
-setopt prompt_subst
-PROMPT='%{$fg[cyan]%}%n@%m> %{$reset_color%}'; export PROMPT
-RPROMPT='%{$fg_bold[yellow]%}$(git_prompt_info)%{$fg[magenta]%}%~ %{$fg[red]%}%T%{$reset_color%}'; export RPROMPT
 
 # Amazon EC2
 if [ -e $HOME/.ec2env ]; then
@@ -44,7 +37,30 @@ if [ -d $HOME/bin ]; then
     export PATH=$PATH:$HOME/bin
 fi
 
-# OS specific stuff
+
+## Prompts ##
+# Set colours using nice names instead of nasty escape sequences
+autoload -U colors
+colors
+setopt prompt_subst
+PROMPT='%{$fg[cyan]%}%n@%m> %{$reset_color%}'; export PROMPT
+RPROMPT='%{$fg_bold[yellow]%}$(git_prompt_info)%{$fg[magenta]%}%~ %{$fg[red]%}%T%{$reset_color%}'; export RPROMPT
+
+
+## Aliases ##
+alias dvips='dvips -Ppdf -G0'
+alias vi='vim'
+
+# ssh tunnel to freefall for sending mail from snb@freebsd.org in mutt
+alias fftun='ssh -N -L 2025:127.0.0.1:25 freefall.freebsd.org'
+
+# Foot-shooting prevention
+alias cp='cp -ip'
+alias mv='mv -i'
+alias rm='rm -i'
+
+
+## OS specific behaviour ##
 if [ `uname` = 'Darwin' ] ; then
     # I want to keep my added TeX stuff in ~/Library/texmf, not default ~/texmf
     TEXMFHOME=$HOME/Library/texmf
@@ -73,26 +89,8 @@ elif [ `uname` = 'FreeBSD' ] ; then
     compctl -K listsysctls sysctl
 fi
 
-# More aliases
-alias dvips='dvips -Ppdf -G0'
-alias vi='vim'
 
-# ssh tunnel to freefall for sending mail from snb@freebsd.org in mutt
-alias fftun='ssh -N -L 2025:127.0.0.1:25 freefall.freebsd.org'
-
-# Foot-shooting prevention
-set -o noclobber
-alias cp='cp -ip'
-alias mv='mv -i'
-alias rm='rm -i'
-
-# Emacs style line editing
-bindkey -e
-
-# Set title bar of window
-precmd () {print -Pn "\e]0;%n@%m\a"}
-
-# Cool tab completion stuff
+## Tab completion ##
 compctl -D -f + -H 0 '' -X '(No file found; using history)'
 compctl -o setopt
 compctl -v echo export
@@ -105,17 +103,17 @@ compctl -c type whence where which whereis killall man apropos
 # Kill takes signal names as the first argument after `-',
 # but job names after % or PIDs as a last resort.
 compctl -j -P '%' + -s '`ps -x | tail +2 | cut -c1-5`' + \
-	-x 's[-] p[1]' -k "($signals[1,-3])" -- kill
+    -x 's[-] p[1]' -k "($signals[1,-3])" -- kill
 
 # Only look at specific file types for certain commands
 compctl -g "*.tif *.tiff *.GIF *.JPG *.gif *.jpg *.bmp *.xpm *.xbm\
-	*.pcx *.pgm *.ppm *.pnm *.png *.eps *.pdf *.ps" + -g "*(-/) .*(-/)"\
-	xv convert mogrify
+    *.pcx *.pgm *.ppm *.pnm *.png *.eps *.pdf *.ps" + -g "*(-/) .*(-/)"\
+    xv convert mogrify
 
 compctl -g "*.pdf *.PDF" + -g "*(-/) .*(-/)" acroread xpdf gv ggv
 
 compctl -g "*.ps *.PS *.pdf *.PDF *.eps" + -g "*(-/) .*(-/)"\
-	ghostview gs gv ggv
+    ghostview gs gv ggv
 
 compctl -g "*.c" + -g "*(-/) .*(-/)" gcc cc
 
@@ -128,10 +126,10 @@ compctl -g "*.zip *.jar *.war" + -g "*(-/) .*(-/)" unzip
 compctl -g "*.Z" + -g "*(-/) .*(-/)" uncompress
 
 compctl -g "*.tar *.tgz *.tz *.tar.Z *.tar.bz2 *.tZ *.tar.gz *.tbz2 *.tbz" \
-	+ -g "*(-/) .*(-/)" tar
+    + -g "*(-/) .*(-/)" tar
 
 compctl -g "*.tex" + -g "*(-/) .*(-/)"\
-	tex latex pdftex pdflatex bibtex latex2html
+    tex latex pdftex pdflatex bibtex latex2html
 
 compctl -g "*.dvi" + -g "*(-/) .*(-/)" xdvi dvips dvipdf
 
@@ -139,7 +137,7 @@ compctl -g "*.mp3 *.MP3" + -g "*(-/) .*(-/)" mpg123 xmms
 
 # Look for html files, then directories, then history
 compctl -g "*.html *.htm" + -g "*(-/) .*(-/)" + -H 0 ''\
-	wget lynx links
+    wget lynx links
 
 # Search the history file for these
 compctl -H 0 '' -k hosts telnet ftp ssh host
@@ -147,3 +145,14 @@ compctl -H 0 '' -k hosts telnet ftp ssh host
 # Ensures that cd <tab> cycles through directories (including "hidden"
 # .directories) only. Likewise rmdir.
 compctl -g "*(-/) .*(-/)" cd rmdir
+
+
+## Miscellaneous ##
+# Emacs style line editing
+bindkey -e
+
+# > redirection won't truncate files
+set -o noclobber
+
+# Set title bar of window
+precmd () {print -Pn "\e]0;%n@%m\a"}
