@@ -1,9 +1,24 @@
 ## Functions ##
 # Get the name of the branch we are on. Returns if we aren't in a git directory
-# or git isn't installed. I stole this from someone, but don't remember where :(
+# or git isn't installed. I originally stole this from someone, but don't
+# remember where :(. Then I added stuff to see if we had uncommitted changes or
+# commit differences with the current branch's remote.
 git_prompt_info() {
+    local ref
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo "(${ref#refs/heads/}) "
+    local branch=${ref#refs/heads/}
+    local mod=$(git diff-files --quiet && git diff-index --quiet --cached HEAD || echo '*')
+    local commitdiffs=''
+    local remote=$(git config branch.$branch.remote || echo '')
+    if [ ! -z $remote ] ; then
+        if [ $(git rev-list --no-merges $remote/$branch...$branch | wc -l | tr -d ' ') -gt 0 ]; then
+            local mine=$(git rev-list --no-merges $remote/$branch..$branch | wc -l | tr -d ' ')
+            local theirs=$(git rev-list --no-merges $branch..$remote/$branch | wc -l | tr -d ' ')
+            if [ $mine -gt 0 ]; then commitdiffs=" +$mine"; fi
+            if [ $theirs -gt 0 ]; then commitdiffs="$commitdiffs -$theirs"; fi
+        fi
+    fi
+    echo "($branch$mod$commitdiffs) "
 }
 
 # trash() and quick-look() taken from oh-my-zsh osx plugin by Sorin Ionescu
