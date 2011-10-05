@@ -1,9 +1,34 @@
 ## Functions ##
 # Get the name of the branch we are on. Returns if we aren't in a git directory
-# or git isn't installed.
+# or git isn't installed. I stole this from someone, but don't remember where :(
 git_prompt_info() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
     echo "(${ref#refs/heads/}) "
+}
+
+# trash() and quick-look() taken from oh-my-zsh osx plugin by Sorin Ionescu
+# <sorin.ionescu@gmail.com>
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/osx/osx.plugin.zsh
+# Move items to trash
+function trash() {
+    local trash_dir="${HOME}/.Trash"
+    local temp_ifs=$IFS
+    IFS=$'\n'
+    for item in "$@"; do
+        if [[ -e "$item" ]]; then
+            item_name="$(basename $item)"
+            if [[ -e "${trash_dir}/${item_name}" ]]; then
+                mv -f "$item" "${trash_dir}/${item_name} $(date "+%H-%M-%S")"
+            else
+                mv -f "$item" "${trash_dir}/"
+            fi
+        fi
+    done
+    IFS=$temp_ifs
+}
+
+function quick-look() {
+    (( $# > 0 )) && qlmanage -p $* &>/dev/null &
 }
 
 
@@ -91,6 +116,7 @@ fi
 
 
 ## Tab completion ##
+# Most of these I got from someone else years ago, but I don't remember where
 compctl -D -f + -H 0 '' -X '(No file found; using history)'
 compctl -o setopt
 compctl -v echo export
