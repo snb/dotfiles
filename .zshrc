@@ -56,6 +56,7 @@ LSCOLORS='gxfxcxdxbxegedabagacad'; export LSCOLORS
 PGPPATH=$HOME/.gnupg; export PGPPATH
 HISTFILE="$HOME/.zsh_history"; export HISTFILE
 SAVEHIST=100000; export SAVEHIST
+HISTSIZE=100000; export HISTSIZE
 
 # Amazon EC2
 if [ -e $HOME/.ec2env ]; then
@@ -196,3 +197,6 @@ set -o noclobber
 
 # Set title bar of window
 precmd () {print -Pn "\e]0;%n@%m\a"}
+
+# Write to history file as soon as command is executed
+setopt inc_append_history
