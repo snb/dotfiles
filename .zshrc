@@ -105,9 +105,9 @@ if [ `uname` = 'Darwin' ] ; then
     TEXMFHOME=$HOME/Library/texmf
     export TEXMFHOME
 
-    # Python stuff installed with easy_install puts scripts here (see
-    # .pydisutils.cfg)
-    PATH=$PATH:$HOME/Library/Python/2.6/bin
+    # Python stuff installed with setup.py install --user or pip install --user
+    # goes in ~/Library/Python/<version>
+    PATH=$PATH:$HOME/Library/Python/2.7/bin
     export PATH
 
     alias ls='ls -asFhG'
