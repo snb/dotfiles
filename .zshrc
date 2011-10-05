@@ -7,7 +7,7 @@ PAGER=less; export PAGER
 LSCOLORS='gxfxcxdxbxegedabagacad'; export LSCOLORS
 PGPPATH=$HOME/.gnupg; export PGPPATH
 HISTFILE="$HOME/.zsh_history"; export HISTFILE
-SAVEHIST=1000; export SAVEHIST
+SAVEHIST=100000; export SAVEHIST
 
 # Get the name of the branch we are on. Returns if we aren't in a git directory
 # or git isn't installed.
