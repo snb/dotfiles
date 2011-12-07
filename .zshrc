@@ -75,7 +75,7 @@ fi
 
 # If we have a $HOME/bin directory, add it to the path
 if [ -d $HOME/bin ]; then
-    export PATH=$PATH:$HOME/bin
+    export PATH=$HOME/bin:$PATH
 fi
 
 
@@ -108,16 +108,11 @@ if [ `uname` = 'Darwin' ] ; then
 
     # Python stuff installed with setup.py install --user or pip install --user
     # goes in ~/Library/Python/<version>
-    PATH=$PATH:$HOME/Library/Python/2.7/bin
+    PATH=$HOME/Library/Python/2.7/bin:$PATH
     export PATH
 
     alias ls='ls -asFhG'
     alias l='ls -alsFhG'
-
-    # Macports
-    if [ -d /opt/local/bin ] ; then
-        PATH=$PATH:/opt/local/bin
-    fi
 
 elif [ `uname` = 'Linux' ] ; then
     alias ls='ls -asFh --color'
