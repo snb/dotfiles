@@ -98,3 +98,6 @@ autocmd FileType python setlocal textwidth=79
 " starts with for or if, which is annoying in TeX files (and plain text, but
 " those files don't have a FileType so I don't know what to do...)
 autocmd FileType plaintex setlocal nosmartindent
+
+" Use detectindent plugin to be consistent when editing existing files
+autocmd BufReadPost * DetectIndent
