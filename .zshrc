@@ -102,6 +102,10 @@ alias rm='rm -i'
 
 ## OS specific behaviour ##
 if [ `uname` = 'Darwin' ] ; then
+    # On lion LANG seems to be getting set to sv_SE.UTF-8 for some reason
+    LANG=en_US.UTF-8
+    export LANG
+
     # I want to keep my added TeX stuff in ~/Library/texmf, not default ~/texmf
     TEXMFHOME=$HOME/Library/texmf
     export TEXMFHOME
