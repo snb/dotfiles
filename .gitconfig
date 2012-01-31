@@ -18,6 +18,8 @@
 [push]
     default = tracking
 
-# Thanks to Daniel Lundin for this one
 [alias]
+    # Thanks to Daniel Lundin for this one
     guilt = "!f(){ git log --pretty='format:%an <%ae>' $@ | sort | uniq -c | sort -rn; }; f"
+
+    ragequit = reset --hard origin/master
