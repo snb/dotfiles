@@ -23,3 +23,6 @@
     guilt = "!f(){ git log --pretty='format:%an <%ae>' $@ | sort | uniq -c | sort -rn; }; f"
 
     ragequit = reset --hard origin/master
+    pristine = clean -dffx
+
+    subup = !git submodule sync && git submodule update --init --recursive
