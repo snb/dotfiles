@@ -58,6 +58,9 @@ HISTFILE="$HOME/.zsh_history"; export HISTFILE
 SAVEHIST=100000; export SAVEHIST
 HISTSIZE=100000; export HISTSIZE
 
+# Prefer anything we've installed to /usr/local/bin over what may be in /usr/bin
+PATH=/usr/local/bin:$PATH; export PATH
+
 # Amazon EC2
 if [ -e $HOME/.ec2env ]; then
     source $HOME/.ec2env
