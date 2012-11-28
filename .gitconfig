@@ -26,3 +26,9 @@
     pristine = clean -dffx
 
     subup = !git submodule sync && git submodule update --init --recursive
+[notes]
+	displayRef = refs/notes/*
+[github]
+	user = snb
+[credential]
+	helper = osxkeychain
