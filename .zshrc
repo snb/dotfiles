@@ -113,11 +113,6 @@ if [ `uname` = 'Darwin' ] ; then
     TEXMFHOME=$HOME/Library/texmf
     export TEXMFHOME
 
-    # Python stuff installed with setup.py install --user or pip install --user
-    # goes in ~/Library/Python/<version>
-    PATH=$HOME/Library/Python/2.7/bin:$PATH
-    export PATH
-
     alias ls='ls -asFhG'
     alias l='ls -alsFhG'
 
