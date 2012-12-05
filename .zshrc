@@ -2,7 +2,8 @@
 # Get the name of the branch we are on. Returns if we aren't in a git directory
 # or git isn't installed. I originally stole this from someone, but don't
 # remember where :(. Then I added stuff to see if we had uncommitted changes or
-# commit differences with the current branch's remote.
+# commit differences with the current branch's remote, and to add ! if we're on
+# a branch that isn't tracking any remotes.
 git_prompt_info() {
     local ref
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
@@ -17,6 +18,8 @@ git_prompt_info() {
             if [ $mine -gt 0 ]; then commitdiffs=" +$mine"; fi
             if [ $theirs -gt 0 ]; then commitdiffs="$commitdiffs -$theirs"; fi
         fi
+    else
+        commitdiffs=' !'
     fi
     echo "($branch$mod$commitdiffs) "
 }
