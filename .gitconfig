@@ -11,6 +11,7 @@
     whitespace = trailing-space,space-before-tab
     autocrlf = input
     safecrlf = true
+    excludesfile = /Users/snb/.gitignore_global
 
 [branch]
     autosetuprebase = always
@@ -27,8 +28,8 @@
 
     subup = !git submodule sync && git submodule update --init --recursive
 [notes]
-	displayRef = refs/notes/*
+    displayRef = refs/notes/*
 [github]
-	user = snb
+    user = snb
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
