@@ -101,3 +101,7 @@ autocmd FileType plaintex setlocal nosmartindent
 
 " Use detectindent plugin to be consistent when editing existing files
 autocmd BufReadPost * DetectIndent
+
+" VimClojure: highlight builtins and make parens super colourful
+let vimclojure#HighlightBuiltins = 1
+let vimclojure#ParenRainbow = 1
