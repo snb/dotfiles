@@ -200,3 +200,6 @@ precmd () {print -Pn "\e]0;%n@%m\a"}
 
 # Write to history file as soon as command is executed
 setopt inc_append_history
+
+# Prefix commands with whitespace to keep them out of history file
+setopt HIST_IGNORE_SPACE
