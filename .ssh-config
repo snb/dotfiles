@@ -1,9 +1,10 @@
 Host *
+# Ensure agent forwarding disabled by default
+ForwardAgent no
+
 # Send a message the server once a minute so stupid routers don't kill the
 # TCP session.
 ServerAliveInterval 60
-# User kerberos
-GSSAPIAuthentication yes
 
 Host unyew
 HostName unyew.silverninja.net
