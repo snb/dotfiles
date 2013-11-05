@@ -162,8 +162,6 @@ compctl -g "*.gz" + -g "*(-/) .*(-/)" gunzip
 
 compctl -g "*.bz2" + -g "*(-/) .*(-/)" bunzip2
 
-compctl -g "*.zip *.jar *.war" + -g "*(-/) .*(-/)" unzip
-
 compctl -g "*.Z" + -g "*(-/) .*(-/)" uncompress
 
 compctl -g "*.tar *.tgz *.tz *.tar.Z *.tar.bz2 *.tZ *.tar.gz *.tbz2 *.tbz" \
