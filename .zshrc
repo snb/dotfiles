@@ -108,6 +108,9 @@ alias rm='rm -i'
 
 ## OS specific behaviour ##
 if [ `uname` = 'Darwin' ] ; then
+    # Java 7 on OS X seems to need this
+    JAVA_HOME=$(/usr/libexec/java_home); export JAVA_HOME
+
     # On lion LANG seems to be getting set to sv_SE.UTF-8 for some reason
     LANG=en_US.UTF-8
     export LANG
