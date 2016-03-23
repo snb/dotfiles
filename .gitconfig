@@ -11,13 +11,13 @@
     whitespace = trailing-space,space-before-tab
     autocrlf = input
     safecrlf = true
-    excludesfile = /Users/snb/.gitignore_global
+    excludesfile = ~/.gitignore_global
 
 [branch]
     autosetuprebase = always
 
 [push]
-    default = tracking
+    default = simple
 
 [alias]
     # Thanks to Daniel Lundin for this one

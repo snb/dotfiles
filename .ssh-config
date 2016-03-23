@@ -5,9 +5,3 @@ ForwardAgent no
 # Send a message the server once a minute so stupid routers don't kill the
 # TCP session.
 ServerAliveInterval 60
-
-Host unyew
-HostName unyew.silverninja.net
-
-Host freefall
-HostName freefall.freebsd.org

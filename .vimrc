@@ -20,7 +20,7 @@ set visualbell
 set t_vb=
 
 " Text Width at standard 80 characters.
-set textwidth=80
+"set textwidth=80
 
 " I usually like four spaces for tab, and spaces when automatically indenting.
 " Leave tabstop unset though, so existing tabs will be 8 spaces wide
@@ -63,7 +63,7 @@ set statusline=%f%m\ %y\ %{fugitive#statusline()}\ %=%l/%L,%v
 set laststatus=2
 
 " Turn on spell checking, with Oxford English Dictionary spelling
-set spell spelllang=en_gb_oed
+"set spell spelllang=en_gb_oed
 
 " Make trailing whitespace and space before tabs ugly
 autocmd BufEnter * match Todo /\s\+$\| \+\ze\t/
