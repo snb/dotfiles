@@ -62,7 +62,7 @@ SAVEHIST=100000; export SAVEHIST
 HISTSIZE=100000; export HISTSIZE
 
 # Prefer anything we've installed to /usr/local/bin over what may be in /usr/bin
-PATH=/usr/local/bin:$PATH; export PATH
+PATH=/usr/local/bin:/usr/local/Cellar/protobuf241/2.4.1/bin:$PATH; export PATH
 
 # Amazon EC2
 if [ -e $HOME/.ec2env ]; then
@@ -84,6 +84,21 @@ if [ -d $HOME/bin ]; then
     export PATH=$HOME/bin:$PATH
 fi
 
+# Go
+if [ -d $HOME/code/go ]; then
+    export GOPATH=$HOME/code/go
+    export PATH=$GOPATH/bin:$PATH
+fi
+
+# Google cloud SDK
+if [ -e $HOME/google-cloud-sdk/path.zsh.inc ]; then
+    source $HOME/google-cloud-sdk/path.zsh.inc
+fi
+
+# docker-machine
+if [ -d .docker/machine/machines/dockervm ]; then
+    eval "$(docker-machine env dockervm)"
+fi
 
 ## Prompts ##
 # Set colours using nice names instead of nasty escape sequences
@@ -128,61 +143,15 @@ elif [ `uname` = 'Linux' ] ; then
 elif [ `uname` = 'FreeBSD' ] ; then
     alias ls='ls -asFhG'
     alias l='ls -alsFhG'
-    listsysctls () { set -A reply $(sysctl -AN ${1%.*}) }
-    compctl -K listsysctls sysctl
 fi
 
 
 ## Tab completion ##
-# Most of these I got from someone else years ago, but I don't remember where
-compctl -D -f + -H 0 '' -X '(No file found; using history)'
-compctl -o setopt
 compctl -v echo export
-compctl -z -P '%' bg
-compctl -j -P '%' fg jobs disown
-compctl -j -P '%' + -s '`ps -x | tail +2 | cut -c1-5`' wait
-compctl -A shift
 compctl -c type whence where which whereis killall man apropos
 
-# Kill takes signal names as the first argument after `-',
-# but job names after % or PIDs as a last resort.
-compctl -j -P '%' + -s '`ps -x | tail +2 | cut -c1-5`' + \
-    -x 's[-] p[1]' -k "($signals[1,-3])" -- kill
-
-# Only look at specific file types for certain commands
-compctl -g "*.tif *.tiff *.GIF *.JPG *.gif *.jpg *.bmp *.xpm *.xbm\
-    *.pcx *.pgm *.ppm *.pnm *.png *.eps *.pdf *.ps" + -g "*(-/) .*(-/)"\
-    xv convert mogrify
-
-compctl -g "*.pdf *.PDF" + -g "*(-/) .*(-/)" acroread xpdf gv ggv
-
-compctl -g "*.ps *.PS *.pdf *.PDF *.eps" + -g "*(-/) .*(-/)"\
-    ghostview gs gv ggv
-
-compctl -g "*.c" + -g "*(-/) .*(-/)" gcc cc
-
-compctl -g "*.gz" + -g "*(-/) .*(-/)" gunzip
-
-compctl -g "*.bz2" + -g "*(-/) .*(-/)" bunzip2
-
-compctl -g "*.Z" + -g "*(-/) .*(-/)" uncompress
-
-compctl -g "*.tar *.tgz *.tz *.tar.Z *.tar.bz2 *.tZ *.tar.gz *.tbz2 *.tbz" \
-    + -g "*(-/) .*(-/)" tar
-
-compctl -g "*.tex" + -g "*(-/) .*(-/)"\
-    tex latex pdftex pdflatex bibtex latex2html
-
-compctl -g "*.dvi" + -g "*(-/) .*(-/)" xdvi dvips dvipdf
-
-compctl -g "*.mp3 *.MP3" + -g "*(-/) .*(-/)" mpg123 xmms
-
-# Look for html files, then directories, then history
-compctl -g "*.html *.htm" + -g "*(-/) .*(-/)" + -H 0 ''\
-    wget lynx links
-
 # Search the history file for these
-compctl -H 0 '' -k hosts telnet ftp ssh host
+compctl -H 0 '' -k ssh host nc
 
 # Ensures that cd <tab> cycles through directories (including "hidden"
 # .directories) only. Likewise rmdir.
